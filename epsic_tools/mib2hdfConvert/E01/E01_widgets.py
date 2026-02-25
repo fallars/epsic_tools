@@ -62,7 +62,7 @@ def _create_ptyrex_bash_submit(json_files, script_folder, node_type, ptycho_time
                 f.write(f"#SBATCH --error={script_folder}{os.sep}%j_error.err\n")
                 f.write(f"#SBATCH --output={script_folder}{os.sep}%j_output.out\n")
 
-                f.write(f"cd /home/ejr78941/ptyrex_temp_5/PtyREX")
+                f.write(f"cd /dls_sw/e02/software/PtyREX2026/PtyREX")
 
                 f.write('\n\nmodule load python/cuda11.7\n\n')
                 f.write('module load hdf5-plugin/1.12\n\n')
@@ -98,7 +98,7 @@ def _create_dm4_bash(dm4_files, binning, script_folder, verbose=False):
                 f.write(f"#SBATCH --output={script_folder}{os.sep}%j_output.out\n")
                 f.write('\n\nmodule load python/epsic3.10\n\n')
 
-                f.write(f"python /dls/e01/data/2026/mg44305-1/processing/Convert_data_inital.py '{dm4_files[num]}' {binning}\n")
+                f.write(f"python /dls_sw/e02/software/epsic_tools/epsic_tools/mib2hdfConvert/E01/Convert_data_inital.py '{dm4_files[num]}' {binning}\n")
     return bash_path
 
 def _create_flagging_text_files(submit_ptyrex_job, tmp_list, verbose=False):
