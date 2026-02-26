@@ -38,7 +38,6 @@ def main():
     #of the strings back together in the correct way - assumming the how the files 
     #are saved does not change'''
 
-    print('***\nusing temp code\n***')
     data_path = ''
     counter = 0 
     print(len(sys.argv))
