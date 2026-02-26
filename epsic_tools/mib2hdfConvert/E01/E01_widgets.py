@@ -592,38 +592,3 @@ class E01_auto_process():
         display(grid,self.ptyrex_paths)
         
 
-
-
-def check_dataset(hdf5_files: list, hdf5_timestamps: list, nested_timestamps: list):
-    '''
-    This function takes a list of hdf5 files, a list of associated timestamps and time stamps of unprocessed data.
-    with these inputs the objective is to obtain the indexs of hdf5 files which have not yet been proccessed (indexs).
-    there are multiple ways to process the data, such as produce virtual Annual Dark field (ADF)/Bright Field (BF), 
-    Differential Phase Constrast (DPC) and parallax images and then to create a list of idenfitying which dataset 
-    need to undergo prevoiusly listed methods (nested actions). 
-    
-    :param hdf5_files: list of all hdf5 files within a visit
-    :type hdf5_files: list
-    :param hdf5_timestamps: list of all the timestamps assoicated with data within a visit
-    :type hdf5_timestamps: list
-    :param nested_timestamps: list of lists of different unconverted data types .i.e ADF, dpc, parallax 
-    :type nested_timestamps: list
-    '''
-    #create an nested empty list of actions
-    todo_vir,todo_dpc,todo_par = [],[],[]
-    #make it same size as the number of timestamps
-    for x in range(len(hdf5_timestamps)):
-        todo_vir.append(0),todo_dpc.append(0),todo_par.append(0)
-    nested_actions = [todo_vir,todo_dpc,todo_par]
-    #create something to to store the indexs
-    indexs = []
-
-    #go through all uncovered timestamps and find the associated index of the hdf5 files and make 
-    #note of type of processing to perfrom
-    for num,l in enumerate(nested_timestamps):
-        for num2, ts in enumerate(nested_timestamps[num]):
-            hdf5_index = hdf5_timestamps.index(ts)
-            nested_actions[num][hdf5_index] = 1
-            if not hdf5_index in indexs:
-                indexs.append(hdf5_index)
-    return indexs, nested_actions
